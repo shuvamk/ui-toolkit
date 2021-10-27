@@ -1,66 +1,54 @@
-import React from 'react';
+import React from "react";
 
-import { RadioButton } from '../../atoms';
+import { RadioButton } from "../../atoms";
 
-import './radioButtonGroup.css';
-
+import "./radioButtonGroup.css";
 
 const RadioButtonGroup = (props: Props) => {
-
-  const { radioButtons, containerClassName, onSelect, selected, ...restProps } = props;
+  const { radioButtons, containerClassName, onSelect, selected, ...restProps } =
+    props;
 
   return (
-    <div id="container"
-      className={containerClassName}
-    >
-      {
-        radioButtons.map((item: RadioButtonType, index: number) => {
-          return (
-            <div key={`${item.value}${index}`}
-              {...restProps}
-            >
-              <RadioButton
-                selected={selected === item.value}
-                onSelect={() => onSelect(item.value)}
-                label={item.label}
-                labelClassName={item.labelClassName}
-                parentClassName={item.parentClassName}
-                radioDirection={item.radioDirection}
-              />
-            </div>
-          );
-        })
-      }
+    <div id="container" className={containerClassName}>
+      {radioButtons.map((item: RadioButtonType, index: number) => {
+        return (
+          <div key={`${item.value}${index}`} {...restProps}>
+            <RadioButton
+              selected={selected === item.value}
+              onSelect={() => onSelect(item.value)}
+              label={item.label}
+              labelClassName={item.labelClassName}
+              parentClassName={item.parentClassName}
+              radioDirection={item.radioDirection}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-
 const defaultProps: DefaultProps = {
-  containerClassName: ''
+  containerClassName: "",
 };
-
 
 type DefaultProps = {
   containerClassName: string;
-}
-
+};
 
 type RequiredProps = {
   radioButtons: RadioButtonType[];
-  selected: string;
+  selected: string | number;
   onSelect: (value: string) => void;
-}
-
+};
 
 export type RadioButtonType = {
-  value: string;
+  value: string | number;
   label: React.ReactNode;
   labelClassName?: string;
   parentClassName?: string;
   radioDirection?: string;
-}
-
+};
 
 export type Props = DefaultProps & RequiredProps;
 
